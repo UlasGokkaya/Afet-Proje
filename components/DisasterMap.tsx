@@ -93,14 +93,17 @@ export default function DisasterMap({ filter }: DisasterMapProps) {
             key={id}
             position={country.coordinates}
             icon={getMarkerIcon(id)}
-            eventHandlers={{
-              mouseover: (e) => {
-                e.target.openPopup();
-              },
-              mouseout: (e) => {
-                e.target.closePopup();
-              },
-            }}
+            eventHandlers={
+              (filter != 'all')
+              ?{
+                mouseover: (e) => {
+                  e.target.openPopup();
+                },
+                mouseout: (e) => {
+                  e.target.closePopup();
+                },
+              } : undefined
+            }
           >
             <Popup maxWidth={450} minWidth={320}>
               <PopupContent countryId={id} activeFilter={filter} />
