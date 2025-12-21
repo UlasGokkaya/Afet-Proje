@@ -55,10 +55,6 @@ export default function FilterControls({
             <div className="w-4 h-4 rounded-full bg-green-500"></div>
             <span className="text-gray-700">Kültürel Tanım</span>
           </div>
-          <div className="flex items-center gap-2">
-            <div className="w-4 h-4 rounded-full bg-gray-400"></div>
-            <span className="text-gray-700">Veri Yok</span>
-          </div>
         </div>
       </div>
     </div>

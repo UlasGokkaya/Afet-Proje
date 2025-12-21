@@ -48,7 +48,7 @@ export default function DisasterMap({ filter }: DisasterMapProps) {
             color = '#EF4444'; 
             break;
           case 'bilimsel':
-            color = '#2a1c6fff'; 
+            color = '#2a1c6f'; 
             break;
           case 'kulturel':
             color = '#10B981'; 
