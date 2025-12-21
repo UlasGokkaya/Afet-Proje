@@ -21,6 +21,7 @@ interface DisasterMapProps {
 
 export default function DisasterMap({ filter }: DisasterMapProps) {
   const [mounted, setMounted] = useState(false);
+  const [openPopup, setOpenPopup] = useState<string | null>(null);
 
   useEffect(() => {
     setMounted(true);
@@ -28,7 +29,7 @@ export default function DisasterMap({ filter }: DisasterMapProps) {
 
   if (!mounted) {
     return (
-      <div className="w-full h-150 bg-gray-100 rounded-lg flex items-center justify-center">
+      <div className="w-full h-200 bg-gray-100 rounded-lg flex items-center justify-center">
         <p className="text-gray-500">Harita yükleniyor...</p>
       </div>
     );
@@ -37,7 +38,7 @@ export default function DisasterMap({ filter }: DisasterMapProps) {
   // Filtreye göre marker renklerini ayarla
   const getMarkerIcon = (countryId: string) => {
     const country = countryData[countryId];
-    let color = '#3B82F6'; // varsayılan mavi
+    let color = '#000000'; // simsiyah
 
     if (filter !== 'all') {
       if (country.definitions[filter]) {
@@ -47,7 +48,7 @@ export default function DisasterMap({ filter }: DisasterMapProps) {
             color = '#EF4444'; 
             break;
           case 'bilimsel':
-            color = '#3B82F6'; 
+            color = '#2a1c6fff'; 
             break;
           case 'kulturel':
             color = '#10B981'; 
@@ -92,6 +93,14 @@ export default function DisasterMap({ filter }: DisasterMapProps) {
             key={id}
             position={country.coordinates}
             icon={getMarkerIcon(id)}
+            eventHandlers={{
+              mouseover: (e) => {
+                e.target.openPopup();
+              },
+              mouseout: (e) => {
+                e.target.closePopup();
+              },
+            }}
           >
             <Popup maxWidth={450} minWidth={320}>
               <PopupContent countryId={id} activeFilter={filter} />

@@ -38,7 +38,10 @@ export default function PopupContent({ countryId, activeFilter }: PopupContentPr
   ];
 
   // Sadece veri olan sekmeleri göster
-  const availableTabs = tabs.filter((tab) => country.definitions[tab.id]);
+  // Eğer bir filtre aktifse (all değilse), sadece o sekmeyi göster
+  const availableTabs = activeFilter && activeFilter !== 'all'
+    ? tabs.filter((tab) => tab.id === activeFilter && country.definitions[tab.id])
+    : tabs.filter((tab) => country.definitions[tab.id]);
 
   return (
     <div className="min-w-75 max-w-100 bg-amber-900 rounded-lg p-4">
@@ -58,22 +61,24 @@ export default function PopupContent({ countryId, activeFilter }: PopupContentPr
         </p>
       </div>
 
-      {/* Tabs */}
-      <div className="flex gap-1 mb-3 border-b border-amber-700">
-        {availableTabs.map((tab) => (
-          <button
-            key={tab.id}
-            onClick={() => setActiveTab(tab.id)}
-            className={`px-3 py-2 text-sm font-bold transition-colors ${
-              activeTab === tab.id
-                ? 'text-white border-b-2 border-white'
-                : 'text-gray-300 hover:text-white'
-            }`}
-          >
-            {tab.label}
-          </button>
-        ))}
-      </div>
+      {/* Tabs - Sadece birden fazla tab varsa göster */}
+      {availableTabs.length > 1 && (
+        <div className="flex gap-1 mb-3 border-b border-amber-700">
+          {availableTabs.map((tab) => (
+            <button
+              key={tab.id}
+              onClick={() => setActiveTab(tab.id)}
+              className={`px-3 py-2 text-sm font-bold transition-colors ${
+                activeTab === tab.id
+                  ? 'text-white border-b-2 border-white'
+                  : 'text-gray-300 hover:text-white'
+              }`}
+            >
+              {tab.label}
+            </button>
+          ))}
+        </div>
+      )}
 
       {/* Content */}
       <div className="max-h-62.5 overflow-y-auto">
