@@ -41,33 +41,33 @@ export default function PopupContent({ countryId, activeFilter }: PopupContentPr
   const availableTabs = tabs.filter((tab) => country.definitions[tab.id]);
 
   return (
-    <div className="min-w-75 max-w-100">
+    <div className="min-w-75 max-w-100 bg-amber-900 rounded-lg p-4">
       {/* Header */}
       <div className="mb-3 relative">
         {/* Saydam Bayrak Arkaplan */}
-        <div className="absolute top-0 right-0 w-20 h-20 opacity-20 pointer-events-none">
+        <div className="absolute top-0 right-0 w-20 h-20 opacity-30 pointer-events-none">
           <img
             src={`https://flagcdn.com/w160/${country.countryCode}.png`}
             alt={`${country.name} bayrağı`}
-            className="w-full h-full object-contain border border-gray-300 rounded"
+            className="w-full h-full object-contain rounded"
           />
         </div>
-        <h3 className="text-xl font-bold text-blue-900 relative z-10">{country.name}</h3>
-        <p className="text-xs text-gray-600 italic mt-1 relative z-10">
+        <h3 className="text-xl font-black text-white relative z-10">{country.name}</h3>
+        <p className="text-xs text-gray-200 font-bold italic mt-1 relative z-10">
           Yerel Terim: {country.localTerm}
         </p>
       </div>
 
       {/* Tabs */}
-      <div className="flex gap-1 mb-3 border-b border-gray-200">
+      <div className="flex gap-1 mb-3 border-b border-amber-700">
         {availableTabs.map((tab) => (
           <button
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
-            className={`px-3 py-2 text-sm font-medium transition-colors ${
+            className={`px-3 py-2 text-sm font-bold transition-colors ${
               activeTab === tab.id
-                ? 'text-blue-600 border-b-2 border-blue-600'
-                : 'text-gray-600 hover:text-blue-500'
+                ? 'text-white border-b-2 border-white'
+                : 'text-gray-300 hover:text-white'
             }`}
           >
             {tab.label}
@@ -78,11 +78,11 @@ export default function PopupContent({ countryId, activeFilter }: PopupContentPr
       {/* Content */}
       <div className="max-h-62.5 overflow-y-auto">
         {country.definitions[activeTab] ? (
-          <div className="text-sm text-gray-700 leading-relaxed">
+          <div className="text-sm text-white font-semibold leading-relaxed">
             {country.definitions[activeTab]}
           </div>
         ) : (
-          <div className="text-sm text-gray-400 italic">
+          <div className="text-sm text-gray-300 italic font-semibold">
             Bu çerçeve için veri bulunamadı.
           </div>
         )}

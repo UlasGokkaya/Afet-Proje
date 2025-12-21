@@ -19,14 +19,14 @@ export default function Home() {
   const [activeFilter, setActiveFilter] = useState<FilterType>('all');
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-blue-50 via-white to-green-50">
-      <div className="container mx-auto px-4 py-8 max-w-7xl">
+    <div className="min-h-screen bg-linear-to-br from-purple-400 via-pink-50 via-40% to-orange-100">
+      <div className="container mx-auto px-4 py-4 max-w-7xl">
         {/* Header */}
-        <header className="text-center mb-8">
-          <h1 className="text-4xl md:text-5xl font-bold text-blue-900 mb-4">
+        <header className="text-center mb-4">
+          <h1 className="text-3xl md:text-5xl font-black mb-2 bg-linear-to-r from-red-600 via-purple-600 to-blue-600 bg-clip-text text-transparent drop-shadow-lg">
             Afet, Dünyada Nasıl Tanımlanıyor?
           </h1>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+          <p className="text-base text-gray-700 max-w-3xl mx-auto font-medium">
             Bir 'afet' tanımının arkasındaki farklı bakış açılarını görmek için haritadaki işaretçilere tıklayın veya filtreleri kullanın.
           </p>
         </header>
@@ -41,11 +41,11 @@ export default function Home() {
         <DisasterMap filter={activeFilter} />
 
         {/* Footer */}
-        <footer className="mt-12 text-center text-sm text-gray-500">
+        <footer className="mt-4 text-center text-xs text-green-500">
           <p>
             *Harita üzerindeki işaretçiler: Japonya, Türkiye, Bolivya ve ABD
           </p>
-          <p className="mt-2">
+          <p className="mt-1 text-center text-sm font-bold text-green-700">
             Afet tanımları kurumsal, bilimsel ve kültürel çerçevelerden derlenmiştir.
           </p>
         </footer>

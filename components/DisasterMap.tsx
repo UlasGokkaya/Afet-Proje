@@ -77,7 +77,7 @@ export default function DisasterMap({ filter }: DisasterMapProps) {
       <MapContainer
         center={[30, 20]}
         zoom={2}
-        className="w-full h-150 rounded-lg shadow-lg z-0"
+        className="w-full h-[700px] md:h-[800px] rounded-lg shadow-lg z-0"
         scrollWheelZoom={true}
         attributionControl={false}
         zoomControl={true}
