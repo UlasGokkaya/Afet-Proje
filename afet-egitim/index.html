@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modül 0: Etkileşimli Harita</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="map-container">
+        <h1>Afet, Dünyada Nasıl Tanımlanıyor?</h1>
+        <p class="instructions">Bir 'afet' tanımının arkasındaki farklı bakış açılarını görmek için bir ülkeye tıklayın veya filtreleri kullanın.</p>
+
+        <div class="filter-controls">
+            <strong>Filtrele:</strong>
+            <label><input type="radio" name="filter" value="all" checked> Tümü</label>
+            <label><input type="radio" name="filter" value="kurumsal"> Kurumsal</label>
+            <label><input type="radio" name="filter" value="bilimsel"> Bilimsel</label>
+            <label><input type="radio" name="filter" value="kulturel"> Kültürel</label>
+        </div>
+
+        <svg class="world-map" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 500">
+            <style>
+                .country { fill: #ccc; stroke: #fff; stroke-width: 0.5; transition: fill 0.3s ease; }
+                .country:hover { fill: #b3b3b3; }
+                .country.clickable { cursor: pointer; }
+                .country.clickable:hover { fill: #007bff; }
+                
+                /* Filtre Vurguları */
+                .highlight-kurumsal { fill: #e67e22; }
+                .highlight-bilimsel { fill: #3498db; }
+                .highlight-kulturel { fill: #2ecc71; }
+                .dimmed { opacity: 0.3; }
+            </style>
+            <path class="country" d="M100,100 h100 v100 h-100 z" /> <path class="country" d="M300,200 h100 v100 h-100 z" /> <path id="JP" class="country clickable" data-filter-focus="kurumsal,bilimsel,kulturel" d="M850,150 a50,50 0 1,0 0,100 a50,50 0 1,0 0,-100" /> <path id="TR" class="country clickable" data-filter-focus="kurumsal,bilimsel" d="M500,200 h50 v25 h-50 z" /> <path id="BO" class="country clickable" data-filter-focus="kurumsal,kulturel" d="M300,350 h40 v40 h-40 z" /> <path id="US" class="country clickable" data-filter-focus="kurumsal,bilimsel" d="M150,150 h100 v80 h-100 z" /> </svg>
+        <small>*Harita temsilidir. Sadece interaktif bölgeler (Japonya, Türkiye, Bolivya, ABD) gösterilmiştir.</small>
+    </div>
+
+    <div id="definition-modal" class="modal-overlay" style="display:none;">
+        <div class="modal-content">
+            <button id="modal-close" class="modal-close-btn">&times;</button>
+            <h2 id="modal-title">Ülke Adı</h2>
+            <p id="modal-local-term"><em>Yerel Terim: </em></p>
+            <div class="tabs">
+                <button class="tab-link active" data-tab="kurumsal">Kurumsal</button>
+                <button class="tab-link" data-tab="bilimsel">Bilimsel</button>
+                <button class="tab-link" data-tab="kulturel">Kültürel</button>
+            </div>
+            <div id="modal-definitions">
+                <div id="tab-kurumsal" class="tab-content active"></div>
+                <div id="tab-bilimsel" class="tab-content"></div>
+                <div id="tab-kulturel" class="tab-content"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
+

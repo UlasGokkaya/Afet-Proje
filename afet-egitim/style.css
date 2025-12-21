@@ -1,0 +1,125 @@
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: #f4f7f6;
+    color: #333;
+    margin: 0;
+    padding: 20px;
+}
+
+.map-container {
+    max-width: 1000px;
+    margin: auto;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+h1 {
+    color: #005a9c;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 10px;
+}
+
+.instructions {
+    font-size: 1.1em;
+    color: #555;
+}
+
+.filter-controls {
+    margin: 15px 0;
+    padding: 10px;
+    background: #f9f9f9;
+    border-radius: 4px;
+}
+
+.filter-controls label {
+    margin-right: 15px;
+    cursor: pointer;
+}
+
+.world-map {
+    width: 100%;
+    height: auto;
+    border: 1px solid #bde;
+    background-color: #eef7ff;
+}
+
+/* Modal (Açılır Pencere) Stilleri */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: #fff;
+    padding: 25px;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 600px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    position: relative;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.modal-close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    color: #aaa;
+    cursor: pointer;
+}
+
+#modal-local-term {
+    font-style: italic;
+    color: #666;
+    margin-top: -10px;
+}
+
+/* Sekme (Tab) Stilleri */
+.tabs {
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 15px;
+}
+
+.tab-link {
+    background: none;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 1em;
+    color: #555;
+}
+
+.tab-link.active {
+    border-bottom: 3px solid #007bff;
+    font-weight: bold;
+    color: #000;
+}
+
+.tab-content {
+    display: none;
+    line-height: 1.6;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+.tab-content[data-isempty="true"] {
+    display: block;
+    color: #999;
+}
