@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from 'react';
 import { countryData } from '@/lib/data/countryData';
-
 interface CountryModalProps {
   countryId: string;
   onClose: () => void;

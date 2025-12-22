@@ -61,9 +61,16 @@ export default function DisasterMap({ filter }: DisasterMapProps) {
 
     return L.divIcon({
       className: 'custom-marker',
-      html: `<div style="background-color: ${color}; width: 25px; height: 25px; border-radius: 50%; border: 3px solid white; box-shadow: 0 2px 5px rgba(0,0,0,0.3);"></div>`,
-      iconSize: [25, 25],
-      iconAnchor: [12, 12],
+      html: `
+        <div style="position: relative; width: 40px; height: 40px;">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="${color}" xmlns="http://www.w3.org/2000/svg" style="filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));">
+            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+          </svg>
+        </div>
+      `,
+      iconSize: [40, 40],
+      iconAnchor: [20, 40],
+      popupAnchor: [0, -40],
     });
   };
 
@@ -82,10 +89,12 @@ export default function DisasterMap({ filter }: DisasterMapProps) {
         scrollWheelZoom={true}
         attributionControl={false}
         zoomControl={true}
+        worldCopyJump={true}
       >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          noWrap={false}
         />
 
         {visibleCountries.map(([id, country]) => (

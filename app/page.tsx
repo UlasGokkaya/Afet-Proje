@@ -23,7 +23,7 @@ export default function Home() {
       <div className="container mx-auto px-4 py-4 max-w-7xl">
         {/* Header */}
         <header className="text-center mb-4">
-          <h1 className="text-3xl md:text-5xl font-[family-name:var(--font-montserrat)] font-bold mb-2 bg-linear-to-r from-red-600 via-purple-600 to-blue-600 bg-clip-text text-transparent drop-shadow-lg">
+          <h1 className="text-3xl md:text-5xl font-(family-name:--font-montserrat) font-bold mb-2 bg-linear-to-r from-red-600 via-purple-600 to-blue-600 bg-clip-text text-transparent drop-shadow-lg">
             Afet, Dünyada Nasıl Tanımlanıyor?
           </h1>
           <p className="text-base text-gray-700 max-w-3xl mx-auto font-large">
@@ -38,14 +38,14 @@ export default function Home() {
         />
 
         {/* Harita */}
-        <DisasterMap filter={activeFilter} />
+        <DisasterMap key={activeFilter} filter={activeFilter} />
 
         {/* Footer */}
         <footer className="mt-4 text-center text-xs text-green-500">
           <p>
             *Harita üzerindeki işaretçiler: Japonya, Türkiye, Bolivya ve ABD
           </p>
-          <p className="mt-1 text-center text-sm font-bold text-green-700">
+          <p className="mt-1 text-center text-sm font-bold text-red-800">
             Afet tanımları kurumsal, bilimsel ve kültürel çerçevelerden derlenmiştir.
           </p>
         </footer>
