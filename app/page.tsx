@@ -20,7 +20,7 @@ export default function Home() {
   const [activeFilter, setActiveFilter] = useState<FilterType>("all");
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100">
+    <div className="min-h-screen bg-linear-to-br from-slate-50 via-blue-50 to-indigo-100">
       <div className="container mx-auto px-4 py-4 max-w-7xl">
         {/* Header */}
         <Header />

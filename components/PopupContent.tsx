@@ -83,7 +83,7 @@ export default function PopupContent({
               onClick={() => setActiveTab(tab.id)}
               variant="ghost"
               size="sm"
-              className={`rounded-none ${
+              className={`rounded-none !ring-0 !ring-offset-0 ${
                 activeTab === tab.id
                   ? "text-white border-b-2 border-white"
                   : "text-gray-300 hover:text-white"

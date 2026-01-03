@@ -39,7 +39,7 @@ export default function FilterControls({
             size="md"
             className={`rounded-full font-medium transition-all ${
               activeFilter === filter.value
-                ? `${filter.color} ring-2 ring-offset-2 ring-opacity-50`
+                ? `${filter.color}`
                 : "bg-gray-100 text-gray-600 hover:bg-gray-200"
             }`}
           >

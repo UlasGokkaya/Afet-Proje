@@ -58,7 +58,7 @@ export default function CountryModal({
             onClick={onClose}
             variant="ghost"
             size="sm"
-            className="text-3xl leading-none p-2!"
+            className="text-3xl leading-none p-2! ring-0! ring-offset-0!"
             aria-label="Kapat"
           >
             &times;
@@ -74,7 +74,7 @@ export default function CountryModal({
                 onClick={() => setActiveTab(tab.id)}
                 variant="ghost"
                 size="md"
-                className={`rounded-none ${
+                className={`rounded-none ring-0! ring-offset-0! ${
                   activeTab === tab.id
                     ? "text-blue-600 border-b-2 border-blue-600"
                     : "text-gray-600"
@@ -101,7 +101,13 @@ export default function CountryModal({
 
         {/* Footer */}
         <div className="sticky bottom-0 bg-gray-50 px-6 py-4 border-t">
-          <Button onClick={onClose} variant="primary" size="md" fullWidth>
+          <Button
+            onClick={onClose}
+            variant="primary"
+            size="md"
+            fullWidth
+            className="ring-0! ring-offset-0!"
+          >
             Kapat
           </Button>
         </div>
