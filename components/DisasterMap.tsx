@@ -1,18 +1,19 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
-import L from 'leaflet';
-import 'leaflet/dist/leaflet.css';
-import { countryData, FilterType } from '@/lib/data/countryData';
-import PopupContent from './PopupContent';
+import { useEffect, useState } from "react";
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import L from "leaflet";
+import "leaflet/dist/leaflet.css";
+import { countryData, FilterType } from "@/lib/data/countryData";
+import PopupContent from "./PopupContent";
 
 // Leaflet marker ikonlarını düzelt
 delete (L.Icon.Default.prototype as any)._getIconUrl;
 L.Icon.Default.mergeOptions({
-  iconRetinaUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png',
-  iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
-  shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
+  iconRetinaUrl:
+    "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png",
+  iconUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png",
+  shadowUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
 });
 
 interface DisasterMapProps {
@@ -38,29 +39,29 @@ export default function DisasterMap({ filter }: DisasterMapProps) {
   // Filtreye göre marker renklerini ayarla
   const getMarkerIcon = (countryId: string) => {
     const country = countryData[countryId];
-    let color = '#000000'; // simsiyah
+    let color = "#000000"; // simsiyah
 
-    if (filter !== 'all') {
+    if (filter !== "all") {
       if (country.definitions[filter]) {
         // Filtre tipine göre renk
         switch (filter) {
-          case 'kurumsal':
-            color = '#EF4444'; 
+          case "kurumsal":
+            color = "#EF4444";
             break;
-          case 'bilimsel':
-            color = '#2a1c6f'; 
+          case "bilimsel":
+            color = "#2a1c6f";
             break;
-          case 'kulturel':
-            color = '#10B981'; 
+          case "kulturel":
+            color = "#10B981";
             break;
         }
       } else {
-        color = '#9CA3AF'; // gri (veri yok)
+        color = "#9CA3AF"; // gri (veri yok)
       }
     }
 
     return L.divIcon({
-      className: 'custom-marker',
+      className: "custom-marker",
       html: `
         <div style="position: relative; width: 40px; height: 40px;">
           <svg width="40" height="40" viewBox="0 0 24 24" fill="${color}" xmlns="http://www.w3.org/2000/svg" style="filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));">
@@ -75,10 +76,12 @@ export default function DisasterMap({ filter }: DisasterMapProps) {
   };
 
   // Filtreye göre ülkeleri göster
-  const visibleCountries = Object.entries(countryData).filter(([_, country]) => {
-    if (filter === 'all') return true;
-    return country.definitions[filter] !== undefined;
-  });
+  const visibleCountries = Object.entries(countryData).filter(
+    ([_, country]) => {
+      if (filter === "all") return true;
+      return country.definitions[filter] !== undefined;
+    }
+  );
 
   return (
     <>
@@ -103,15 +106,16 @@ export default function DisasterMap({ filter }: DisasterMapProps) {
             position={country.coordinates}
             icon={getMarkerIcon(id)}
             eventHandlers={
-              (filter != 'all')
-              ?{
-                mouseover: (e) => {
-                  e.target.openPopup();
-                },
-                mouseout: (e) => {
-                  e.target.closePopup();
-                },
-              } : undefined
+              filter != "all"
+                ? {
+                    mouseover: (e: L.LeafletMouseEvent) => {
+                      e.target.openPopup();
+                    },
+                    mouseout: (e: L.LeafletMouseEvent) => {
+                      e.target.closePopup();
+                    },
+                  }
+                : undefined
             }
           >
             <Popup maxWidth={450} minWidth={320}>
