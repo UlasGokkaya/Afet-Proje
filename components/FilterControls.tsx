@@ -1,6 +1,7 @@
-'use client';
+"use client";
 
-import { FilterType } from '@/lib/data/countryData';
+import { FilterType } from "@/lib/data/countryData";
+import Button from "./Button";
 
 interface FilterControlsProps {
   activeFilter: FilterType;
@@ -12,10 +13,18 @@ export default function FilterControls({
   onFilterChange,
 }: FilterControlsProps) {
   const filters: { value: FilterType; label: string; color: string }[] = [
-    { value: 'all', label: 'Tümü', color: 'bg-gray-200 text-gray-800' },
-    { value: 'kurumsal', label: 'Kurumsal', color: 'bg-red-100 text-red-800' },
-    { value: 'bilimsel', label: 'Bilimsel', color: 'bg-blue-100 text-blue-800' },
-    { value: 'kulturel', label: 'Kültürel', color: 'bg-green-100 text-green-800' },
+    { value: "all", label: "Tümü", color: "bg-gray-200 text-gray-800" },
+    { value: "kurumsal", label: "Kurumsal", color: "bg-red-100 text-red-800" },
+    {
+      value: "bilimsel",
+      label: "Bilimsel",
+      color: "bg-blue-100 text-blue-800",
+    },
+    {
+      value: "kulturel",
+      label: "Kültürel",
+      color: "bg-green-100 text-green-800",
+    },
   ];
 
   return (
@@ -23,20 +32,22 @@ export default function FilterControls({
       <div className="flex flex-wrap items-center gap-3">
         <span className="font-semibold text-gray-700">Filtrele:</span>
         {filters.map((filter) => (
-          <button
+          <Button
             key={filter.value}
             onClick={() => onFilterChange(filter.value)}
-            className={`px-4 py-2 rounded-full font-medium transition-all ${
+            variant="ghost"
+            size="md"
+            className={`rounded-full font-medium transition-all ${
               activeFilter === filter.value
                 ? `${filter.color} ring-2 ring-offset-2 ring-opacity-50`
-                : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                : "bg-gray-100 text-gray-600 hover:bg-gray-200"
             }`}
           >
             {filter.label}
-          </button>
+          </Button>
         ))}
       </div>
-      
+
       {/* Renk açıklaması */}
       <div className="mt-4 pt-4 border-t border-gray-200">
         <p className="text-sm text-gray-600 mb-2">

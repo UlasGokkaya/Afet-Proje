@@ -46,13 +46,13 @@ export default function DisasterMap({ filter }: DisasterMapProps) {
         // Filtre tipine göre renk
         switch (filter) {
           case "kurumsal":
-            color = "#EF4444";
+            color = "#EF4444"; // red-500
             break;
           case "bilimsel":
-            color = "#2a1c6f";
+            color = "#3B82F6"; // blue-500
             break;
           case "kulturel":
-            color = "#10B981";
+            color = "#10B981"; // green-500
             break;
         }
       } else {
@@ -88,7 +88,7 @@ export default function DisasterMap({ filter }: DisasterMapProps) {
       <MapContainer
         center={[30, 20]}
         zoom={2}
-        className="w-full h-[700px] md:h-[800px] rounded-lg shadow-lg z-0"
+        className="w-full h-175 md:h-200 rounded-lg shadow-lg z-0"
         scrollWheelZoom={true}
         attributionControl={false}
         zoomControl={true}
