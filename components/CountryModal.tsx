@@ -1,21 +1,25 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import { countryData } from '@/lib/data/countryData';
+import { useState, useEffect } from "react";
+import { countryData } from "@/lib/data/countryData";
+import Button from "./Button";
 interface CountryModalProps {
   countryId: string;
   onClose: () => void;
 }
 
-type TabType = 'kurumsal' | 'bilimsel' | 'kulturel';
+type TabType = "kurumsal" | "bilimsel" | "kulturel";
 
-export default function CountryModal({ countryId, onClose }: CountryModalProps) {
+export default function CountryModal({
+  countryId,
+  onClose,
+}: CountryModalProps) {
   const country = countryData[countryId];
-  const [activeTab, setActiveTab] = useState<TabType>('kurumsal');
+  const [activeTab, setActiveTab] = useState<TabType>("kurumsal");
 
   // İlk görünür sekmeyi seç
   useEffect(() => {
-    const tabs: TabType[] = ['kurumsal', 'bilimsel', 'kulturel'];
+    const tabs: TabType[] = ["kurumsal", "bilimsel", "kulturel"];
     const firstAvailable = tabs.find((tab) => country.definitions[tab]);
     if (firstAvailable) {
       setActiveTab(firstAvailable);
@@ -25,9 +29,9 @@ export default function CountryModal({ countryId, onClose }: CountryModalProps) 
   if (!country) return null;
 
   const tabs: { id: TabType; label: string }[] = [
-    { id: 'kurumsal', label: 'Kurumsal' },
-    { id: 'bilimsel', label: 'Bilimsel' },
-    { id: 'kulturel', label: 'Kültürel' },
+    { id: "kurumsal", label: "Kurumsal" },
+    { id: "bilimsel", label: "Bilimsel" },
+    { id: "kulturel", label: "Kültürel" },
   ];
 
   // Sadece veri olan sekmeleri göster
@@ -50,30 +54,34 @@ export default function CountryModal({ countryId, onClose }: CountryModalProps) 
               Yerel Terim: {country.localTerm}
             </p>
           </div>
-          <button
+          <Button
             onClick={onClose}
-            className="text-gray-400 hover:text-gray-600 text-3xl leading-none"
+            variant="ghost"
+            size="sm"
+            className="text-3xl leading-none p-2! ring-0! ring-offset-0!"
             aria-label="Kapat"
           >
             &times;
-          </button>
+          </Button>
         </div>
 
         {/* Tabs */}
         <div className="border-b">
           <div className="flex px-6">
             {availableTabs.map((tab) => (
-              <button
+              <Button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
-                className={`px-4 py-3 font-medium transition-colors ${
+                variant="ghost"
+                size="md"
+                className={`rounded-none ring-0! ring-offset-0! ${
                   activeTab === tab.id
-                    ? 'text-blue-600 border-b-2 border-blue-600'
-                    : 'text-gray-600 hover:text-blue-500'
+                    ? "text-blue-600 border-b-2 border-blue-600"
+                    : "text-gray-600"
                 }`}
               >
                 {tab.label}
-              </button>
+              </Button>
             ))}
           </div>
         </div>
@@ -93,12 +101,15 @@ export default function CountryModal({ countryId, onClose }: CountryModalProps) 
 
         {/* Footer */}
         <div className="sticky bottom-0 bg-gray-50 px-6 py-4 border-t">
-          <button
+          <Button
             onClick={onClose}
-            className="w-full bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors font-medium"
+            variant="primary"
+            size="md"
+            fullWidth
+            className="ring-0! ring-offset-0!"
           >
             Kapat
-          </button>
+          </Button>
         </div>
       </div>
     </div>

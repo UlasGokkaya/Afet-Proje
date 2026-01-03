@@ -1,18 +1,40 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
-import L from 'leaflet';
-import 'leaflet/dist/leaflet.css';
-import { countryData, FilterType } from '@/lib/data/countryData';
-import PopupContent from './PopupContent';
+import { useEffect, useState } from "react";
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import L from "leaflet";
+import "leaflet/dist/leaflet.css";
+import { countryData, FilterType } from "@/lib/data/countryData";
+import PopupContent from "./PopupContent";
+
+// Global CSS for marker animations
+if (typeof window !== "undefined") {
+  const style = document.createElement("style");
+  style.innerHTML = `
+    .custom-marker {
+      cursor: pointer !important;
+    }
+    .custom-marker .marker-pin {
+      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .custom-marker:hover .marker-pin {
+      transform: translateX(-50%) scale(1.2) !important;
+      filter: drop-shadow(0 6px 12px rgba(0,0,0,0.5)) brightness(1.2) !important;
+    }
+  `;
+  if (!document.querySelector("#marker-hover-styles")) {
+    style.id = "marker-hover-styles";
+    document.head.appendChild(style);
+  }
+}
 
 // Leaflet marker ikonlarını düzelt
 delete (L.Icon.Default.prototype as any)._getIconUrl;
 L.Icon.Default.mergeOptions({
-  iconRetinaUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png',
-  iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
-  shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
+  iconRetinaUrl:
+    "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png",
+  iconUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png",
+  shadowUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
 });
 
 interface DisasterMapProps {
@@ -38,32 +60,32 @@ export default function DisasterMap({ filter }: DisasterMapProps) {
   // Filtreye göre marker renklerini ayarla
   const getMarkerIcon = (countryId: string) => {
     const country = countryData[countryId];
-    let color = '#000000'; // simsiyah
+    let color = "#000000"; // simsiyah
 
-    if (filter !== 'all') {
+    if (filter !== "all") {
       if (country.definitions[filter]) {
         // Filtre tipine göre renk
         switch (filter) {
-          case 'kurumsal':
-            color = '#EF4444'; 
+          case "kurumsal":
+            color = "#EF4444";
             break;
-          case 'bilimsel':
-            color = '#2a1c6f'; 
+          case "bilimsel":
+            color = "#2a1c6f";
             break;
-          case 'kulturel':
-            color = '#10B981'; 
+          case "kulturel":
+            color = "#10B981";
             break;
         }
       } else {
-        color = '#9CA3AF'; // gri (veri yok)
+        color = "#9CA3AF"; // gri (veri yok)
       }
     }
 
     return L.divIcon({
-      className: 'custom-marker',
+      className: "custom-marker",
       html: `
-        <div style="position: relative; width: 40px; height: 40px;">
-          <svg width="40" height="40" viewBox="0 0 24 24" fill="${color}" xmlns="http://www.w3.org/2000/svg" style="filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));">
+        <div style="position: relative; width: 40px; height: 40px; pointer-events: auto;">
+          <svg class="marker-pin" width="40" height="40" viewBox="0 0 24 24" fill="${color}" xmlns="http://www.w3.org/2000/svg" style="position: absolute; bottom: 0; left: 50%; transform: translateX(-50%) scale(0.9); transform-origin: center bottom; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3)); pointer-events: none;">
             <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
           </svg>
         </div>
@@ -75,10 +97,12 @@ export default function DisasterMap({ filter }: DisasterMapProps) {
   };
 
   // Filtreye göre ülkeleri göster
-  const visibleCountries = Object.entries(countryData).filter(([_, country]) => {
-    if (filter === 'all') return true;
-    return country.definitions[filter] !== undefined;
-  });
+  const visibleCountries = Object.entries(countryData).filter(
+    ([_, country]) => {
+      if (filter === "all") return true;
+      return country.definitions[filter] !== undefined;
+    }
+  );
 
   return (
     <>
@@ -103,15 +127,16 @@ export default function DisasterMap({ filter }: DisasterMapProps) {
             position={country.coordinates}
             icon={getMarkerIcon(id)}
             eventHandlers={
-              (filter != 'all')
-              ?{
-                mouseover: (e) => {
-                  e.target.openPopup();
-                },
-                mouseout: (e) => {
-                  e.target.closePopup();
-                },
-              } : undefined
+              filter != "all"
+                ? {
+                    mouseover: (e) => {
+                      e.target.openPopup();
+                    },
+                    mouseout: (e) => {
+                      e.target.closePopup();
+                    },
+                  }
+                : undefined
             }
           >
             <Popup maxWidth={450} minWidth={320}>
